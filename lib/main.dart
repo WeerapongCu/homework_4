@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'นับเลขแบบไทยๆ',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -47,19 +47,30 @@ class _MyHomepageState extends State<MyHomepage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            TextButton(
-              onPressed: () {
-                setState(() {
-                  number++;
-                  if (number > 99) {
-                    number = 0;
-                  }
-                });
-              },
-              child: Icon(
-                Icons.arrow_drop_up,
-                color: Color(0xFF250059),
-                size: 100,
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.circle,
+              ),
+              child: TextButton(
+                onPressed: () {
+                  setState(() {
+                    number++;
+                    if (number > 99) {
+                      number = 0;
+                    }
+                  });
+                },
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all(
+                    CircleBorder(),
+                  )
+                ),
+                child: Icon(
+                  Icons.arrow_drop_up,
+                  color: Color(0xFF250059),
+                  size: 100,
+                ),
               ),
             ),
             Container(
@@ -91,33 +102,28 @@ class _MyHomepageState extends State<MyHomepage> {
                 ),
               ),
             ),
-            TextButton(
-              onPressed: () {
-                setState(() {
-                  number--;
-                  if (number < 0) {
-                    number = 99;
-                  }
-                });
-              },
-              child: Icon(
-                Icons.arrow_drop_down,
-                color: Color(0xFF250059),
-                size: 100,
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.circle
               ),
-            ),
-            TextButton(
-              onPressed: () {
-                setState(() {
-                  number++;
-                  if (number > 99) {
-                    number = 0;
-                  }
-                });
-              },
-              child: Text(
-                'Increment',
-                style: TextStyle(fontSize: 20),
+              child: TextButton(
+                onPressed: () {
+                  setState(() {
+                    number--;
+                    if (number < 0) {
+                      number = 99;
+                    }
+                  });
+                },
+                child: Icon(
+                  Icons.arrow_drop_down,
+                  color: Color(0xFF250059),
+                  size: 100,
+                ),
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all(CircleBorder()),
+                ),
               ),
             ),
           ],
