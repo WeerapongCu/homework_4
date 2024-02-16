@@ -15,18 +15,23 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomepage(),
+      home: MyHomepage(),
     );
   }
 }
 
-class MyHomepage extends StatelessWidget {
+class MyHomepage extends StatefulWidget {
   const MyHomepage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    int number = 0;
+  _MyHomepageState createState() => _MyHomepageState();
+}
 
+class _MyHomepageState extends State<MyHomepage> {
+  int number = 0;
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
@@ -42,18 +47,21 @@ class MyHomepage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-             TextButton(
-                onPressed: () {
+            TextButton(
+              onPressed: () {
+                setState(() {
                   number++;
                   if (number > 99) {
-                    number==0;
+                    number = 0;
                   }
-                },
-                child: Icon(
-                  Icons.arrow_drop_up,
-                  color: Color(0xFF250059),
-                  size: 100,
-                )),
+                });
+              },
+              child: Icon(
+                Icons.arrow_drop_up,
+                color: Color(0xFF250059),
+                size: 100,
+              ),
+            ),
             Container(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -61,11 +69,13 @@ class MyHomepage extends StatelessWidget {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Row(children: [
-                           matrix(number, 0),
-                      SizedBox(width: 20,),
-                      matrix(number, 1),
-                      ],)
+                      Row(
+                        children: [
+                          matrix(number, 0),
+                          SizedBox(width: 20,),
+                          matrix(number, 1),
+                        ],
+                      )
                     ],
                   ),
                 ],
@@ -82,22 +92,40 @@ class MyHomepage extends StatelessWidget {
               ),
             ),
             TextButton(
-                onPressed: () {
+              onPressed: () {
+                setState(() {
                   number--;
                   if (number < 0) {
-                    number==99;
+                    number = 99;
                   }
-                },
-                child: Icon(
-                  Icons.arrow_drop_down,
-                  color: Color(0xFF250059),
-                  size: 100,
-                )),
+                });
+              },
+              child: Icon(
+                Icons.arrow_drop_down,
+                color: Color(0xFF250059),
+                size: 100,
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  number++;
+                  if (number > 99) {
+                    number = 0;
+                  }
+                });
+              },
+              child: Text(
+                'Increment',
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
+
 
   Column matrix(int number, int index) {
     List<List<List<int>>> digitMatrix = getDigitMatrix(number);
